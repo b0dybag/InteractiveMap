@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Map</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <style>
+#leftcol { 
+  float: left;
+  width: 300px;
+  margin: 10px 20px 10px 15%;
+}
+
+#mymap {
+  margin-left: 325px;
+  height: 400px;
+  width: 500px;
+  border: 2px solid black;
+}
+
+p {
+  margin: 0;
+  padding: 0 0 .5em;
+}
+
+hr {
+    color: red;
+    background-color: red;
+    width: 300px;
+}
+
+.point {
+  width: 280px;
+  height: 18px;
+  background: whitesmoke;
+  border: solid 2px grey;
+  position: relative;
+}
+
+.remove-button {
+  position: absolute;
+  font-size: 110%;
+  top: -4px;
+  color: red;
+  right: -28px;
+  border: none;
+  background: transparent;
+}
+.description {
+    border: solid 2px orangered;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 0px 20px;
+    float: left;
+    font: large arial;
+}
+.description h3 {
+    color: orangered;
+}
+.description ul {
+    margin: 0;
+}
+.description li {
+    margin: 5px;
+}
+    </style>
+</head>
+<body>
+    <div id="leftcol">
+        <h3>¬ведите название маркера</h3>
+        <input id="input" type="text" style="width: 280px">
+        <div id="messages">
+        </div>
+    </div>
+    <div id="mymap"></div>
+    <div class="description">
+    <h3> Project Description </h3>
+    <p>
+        ƒанный проект реализовывает редактор маршрутов Ч одностраничное приложение, в
+        котором пользователь в интерактивном режиме может создавать на карте
+        маршрут, указыва€ начальную, конечную и промежуточные точки движени€.
+        ѕриложение визуально состоит из:
+    </p>
+    <ul>
+        <li>текстового пол€ ввода дл€ новых точек маршрута;</li>
+        <li>списка уже введенных точек маршрута;</li>
+        <li>интерактивной карты.</li>
+    </ul>
+    <h3> Project Functional Description </h3>
+    <p>
+        Ќова€ точка маршрута добавл€етс€ с помощью ввода ее названи€ в текстовом
+        поле и нажати€ Enter. ѕосле этого:
+    </p>
+    <ul>
+        <li>
+            введенна€ точка маршрута отображаетс€ в конце списка уже добавленных
+            точек;
+        </li>
+        <li>
+            в текущем центре карты по€вл€етс€ маркер, обозначающий новую точку
+            маршрута.
+        </li>
+    </ul>
+        <p>
+            Ќапротив каждой точки маршрута в списке находитс€ кнопка удалени€, при ее
+            нажатии точка маршрута пропадает из списка, а с карты пропадает ее маркер.
+        </p>
+        <p>
+            ѕор€док точек маршрута в списке можно измен€ть перетаскиванием.
+        </p>
+        <p>
+            ћаркеры, соответствующие точкам маршрута, можно перемещать по карте
+            перетаскиванием.
+        </p>
+        <p>
+            ћаркеры на карте соединены пр€мыми лини€ми в том пор€дке, в котором они
+            наход€тс€ в списке. ѕолученна€ таким образом ломана€ изображает маршрут,
+            перва€ точка в списке Ч начало маршрута, последн€€ Ч конец маршрута.
+        </p>
+        <p>
+            ѕри изменении пор€дка точек в списке или их удалении, а также при перемещении
+            маркеров маршрут на карте автоматически перерисовываетс€.
+        </p>
+        <p>
+            ѕри клике на маркер по€вл€етс€ балун, в балуне отображаетс€ название
+            соответствующей ему точки.
+        </p>
+    </div>
+    <script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
+    <script>
+        var hr = document.createElement("hr");
+        var map = new YMaps.Map(document.getElementById("mymap"));
+        map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 13);
+        map.enableScrollZoom();
+        var objManager = new YMaps.ObjectManager();
+        var lines = new YMaps.Polyline();
+        map.addOverlay(objManager);
+        map.addOverlay(lines);
+        var marks = [];
+
+        input.onkeypress = function () {
+            if (event.keyCode == "13") {
+                let elem = document.createElement("div");
+                elem.className = "point";
+                elem.onmousedown = mouseDown;
+                let p = document.createElement("p");
+                p.innerHTML = this.value;
+
+                var placeMark = new YMaps.Placemark(map.getCenter(), { draggable: true })
+                placeMark.name = this.value;
+                objManager.add(placeMark);
+                lines.addPoint(placeMark.getGeoPoint());
+                marks.push(placeMark);
+
+                YMaps.Events.observe(placeMark, placeMark.Events.Drag, function () {
+                    map.update();
+                });
+
+                let button = document.createElement("button");
+                button.className = "remove-button";
+                button.innerHTML = "[x]";
+
+                button.onmousedown = function () {
+                    console.log("a potom tut!");
+                    var el = this.parentNode;
+                    el.parentNode.removeChild(el);
+                    objManager.remove(placeMark);
+                    marks.splice(marks.indexOf(placeMark), 1);
+                    draw();
+                    event.stopPropagation();
+                };
+
+                elem.appendChild(button);
+                elem.appendChild(p);
+                messages.appendChild(elem);
+                this.value = "";
+            }
+        }
+
+        function draw() {
+            map.removeOverlay(lines);
+            let temp = [];
+            for (let i = 0; i < marks.length; i++) {
+                temp.push(marks[i].getGeoPoint());
+            }
+            lines = new YMaps.Polyline(temp);
+            map.addOverlay(lines);
+        }
+
+        function mouseDown(e) {
+            console.log("ja bil tut!");
+            var self = this;
+            var elemPos;
+            self.style.background = "red";
+            moveAt(e);
+
+            function moveAt(e) {
+                var elem = document.elementFromPoint(e.pageX, e.pageY);
+                if (!messages.contains(elem)) return;
+                var messagesCoords = messages.getBoundingClientRect();
+                var coordYOnMessages = e.pageY - messagesCoords.top;
+                elemPos = parseInt(coordYOnMessages / 20);
+                delAllHr();
+                var elems = messages.getElementsByClassName("point");
+                messages.insertBefore(hr, elems[elemPos]);
+            }
+
+            document.onmousemove = function (e) {
+                moveAt(e);
+            }
+
+            document.onmouseup = function (e) {
+                self.style = "";
+                delAllHr();
+                document.onmousemove = document.onmouseup = null;
+                changeDivPos(self, elemPos);
+            };
+            return false;
+        }
+
+        function delAllHr() {
+            let hrs = document.getElementsByTagName("hr");
+            for (var i = 0; i < hrs.length; i++) {
+                hrs[i].parentNode.removeChild(hrs[i]);
+            }
+        }
+
+        function changeDivPos(el, pos) {
+            var allPoints = messages.getElementsByClassName("point");
+            var elpos = (function () {
+                for (var i = 0; i < allPoints.length; i++) {
+                    if (allPoints[i] == el) return i;
+                }
+            })();
+
+            if ((pos == elpos) || (pos - 1 == elpos)) return;
+
+            changeMarksPos(elpos, pos);
+
+            var beforeThis = allPoints[pos];
+            let info = (pos == allPoints.length) ? true : false;
+            el.parentNode.removeChild(el);
+            if (info)
+                messages.appendChild(el);
+            else
+                messages.insertBefore(el, beforeThis);
+        }
+
+        function changeMarksPos(el, pos) {
+            let temp = marks[el];
+            marks.splice(el, 1);
+            marks.splice(pos, 0, temp);
+            draw();
+        }
+    </script>
+</body>
+</html>
