@@ -1,128 +1,142 @@
-<!DOCTYPE html>
+п»ї<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="windows-1251">
     <title>Map</title>
     <!--<link rel="stylesheet" href="style.css">-->
     <style>
-#leftcol { 
-  float: left;
-  width: 300px;
-  margin: 10px 20px 10px 15%;
-}
+        #leftcol {
+            float: left;
+            width: 300px;
+            margin: 10px 20px 10px 15%;
+        }
 
-#mymap {
-  margin-left: 325px;
-  height: 400px;
-  width: 500px;
-  border: 2px solid black;
-}
+        #mymap {
+            margin-left: 325px;
+            height: 400px;
+            width: 500px;
+            border: 2px solid black;
+        }
 
-p {
-  margin: 0;
-  padding: 0 0 .5em;
-}
+        p {
+            margin: 0;
+            padding: 0 0 .5em;
+        }
 
-hr {
-    color: red;
-    background-color: red;
-    width: 300px;
-}
+        hr {
+            color: red;
+            background-color: red;
+            width: 300px;
+        }
 
-.point {
-  width: 280px;
-  height: 18px;
-  background: whitesmoke;
-  border: solid 2px grey;
-  position: relative;
-}
+        .point {
+            width: 280px;
+            height: 18px;
+            background: whitesmoke;
+            border: solid 2px grey;
+            position: relative;
+        }
 
-.remove-button {
-  position: absolute;
-  font-size: 110%;
-  top: -4px;
-  color: red;
-  right: -28px;
-  border: none;
-  background: transparent;
-}
-.description {
-    border: solid 2px orangered;
-    border-radius: 20px;
-    margin: 20px;
-    padding: 0px 20px;
-    float: left;
-    font: large arial;
-}
-.description h3 {
-    color: orangered;
-}
-.description ul {
-    margin: 0;
-}
-.description li {
-    margin: 5px;
-}
+        .remove-button {
+            position: absolute;
+            font-size: 110%;
+            top: -4px;
+            color: red;
+            right: -28px;
+            border: none;
+            background: transparent;
+        }
+
+        .description {
+            border: solid 2px orangered;
+            border-radius: 20px;
+            margin: 20px;
+            padding: 0px 20px;
+            float: left;
+            font: large arial;
+        }
+
+            .description h3 {
+                color: orangered;
+            }
+
+            .description ul {
+                margin: 0;
+            }
+
+            .description li {
+                margin: 5px;
+            }
+
+        .language-box img {
+            width: 50px;
+            height: 50px;
+            float: right;
+        }
+
+        .gray {
+            filter: grayscale(85%);
+        }
     </style>
 </head>
 <body>
     <div id="leftcol">
-        <h3>Введите название маркера</h3>
+        <h3>Enter marker name</h3>
         <input id="input" type="text" style="width: 280px">
         <div id="messages">
         </div>
     </div>
     <div id="mymap"></div>
     <div class="description">
-    <h3> Project Description </h3>
-    <p>
-        Данный проект реализовывает редактор маршрутов — одностраничное приложение, в
-        котором пользователь в интерактивном режиме может создавать на карте
-        маршрут, указывая начальную, конечную и промежуточные точки движения.
-        Приложение визуально состоит из:
-    </p>
-    <ul>
-        <li>текстового поля ввода для новых точек маршрута;</li>
-        <li>списка уже введенных точек маршрута;</li>
-        <li>интерактивной карты.</li>
-    </ul>
-    <h3> Project Functional Description </h3>
-    <p>
-        Новая точка маршрута добавляется с помощью ввода ее названия в текстовом
-        поле и нажатия Enter. После этого:
-    </p>
-    <ul>
-        <li>
-            введенная точка маршрута отображается в конце списка уже добавленных
-            точек;
-        </li>
-        <li>
-            в текущем центре карты появляется маркер, обозначающий новую точку
-            маршрута.
-        </li>
-    </ul>
+        <div class="language-box">
+            <img class="language-EN" src="https://cex-prod-backend.herokuapp.com/api/v1/public/icon/DICT_LANGUAGE-EN.SVG">
+            <img class="language-PL gray" src="https://cex-prod-backend.herokuapp.com/api/v1/public/icon/DICT_LANGUAGE-PL.SVG">
+            <img class="language-RU gray" src="https://cex-prod-backend.herokuapp.com/api/v1/public/icon/DICT_LANGUAGE-RU.SVG">
+        </div>
+        <h3> Project Description </h3>
         <p>
-            Напротив каждой точки маршрута в списке находится кнопка удаления, при ее
-            нажатии точка маршрута пропадает из списка, а с карты пропадает ее маркер.
+            This project is implementing the route editor - a single page application,
+            in which the user can create on the map route by pointing the start, ending and intermediate
+            points of movement. The app visually consists of:
+        </p>
+        <ul>
+            <li>input text field for new waypoints;</li>
+            <li>list of already entered waypoints;</li>
+            <li>interactive map.</li>
+        </ul>
+        <h3> Project Functional Description </h3>
+        <p>
+            A new waypoint is adding by entering its name in the text field and pressing Enter key. Thereafter:
+        </p>
+        <ul>
+            <li>
+                the entered waypoint is displayed at the end of the list of already added points;
+            </li>
+            <li>
+                in the current center of the map appears a marker, indicating a new waypoint.
+            </li>
+        </ul>
+        <p>
+            There is a delete button in front of each waypoint in the list, when you
+            press it, the waypoint disappears from the list, and the marker disappears from the map.
         </p>
         <p>
-            Порядок точек маршрута в списке можно изменять перетаскиванием.
+            The order of waypoints in the list can be changed by dragging.
         </p>
         <p>
-            Маркеры, соответствующие точкам маршрута, можно перемещать по карте
-            перетаскиванием.
+            Markers relevant to waypoints can be moved around the map by dragging.
         </p>
         <p>
-            Маркеры на карте соединены прямыми линиями в том порядке, в котором они
-            находятся в списке. Полученная таким образом ломаная изображает маршрут,
-            первая точка в списке — начало маршрута, последняя — конец маршрута.
+            Map markers are connected by straight lines in the order in which they appear
+            in the list. The resulting broken line represents the route, the first point in the list is the
+            beginning of the route, the last is the end of the route.
         </p>
         <p>
-            При изменении порядка точек в списке или их удалении, а также при перемещении
-            маркеров маршрут на карте автоматически перерисовывается.
+            When you change the order of waypoints in the list or delete them,
+            or when you move the markers, the route on the map is automatically redrawn.
         </p>
         <p>
-            При клике на маркер появляется балун, в балуне отображается название
-            соответствующей ему точки.
+            When you clicking on a marker, a balun appears, the name of the relevant waypoint is displayed in the balun.
         </p>
     </div>
     <script src="https://api-maps.yandex.ru/1.1/index.xml" type="text/javascript"></script>
@@ -160,7 +174,6 @@ hr {
                 button.innerHTML = "[x]";
 
                 button.onmousedown = function () {
-                    console.log("a potom tut!");
                     var el = this.parentNode;
                     el.parentNode.removeChild(el);
                     objManager.remove(placeMark);
@@ -187,7 +200,6 @@ hr {
         }
 
         function mouseDown(e) {
-            console.log("ja bil tut!");
             var self = this;
             var elemPos;
             self.style.background = "red";
@@ -251,6 +263,143 @@ hr {
             marks.splice(pos, 0, temp);
             draw();
         }
+
+        //----------------------language change
+        var lb = document.getElementsByClassName("language-box")[0];
+        var lbactive = lb.firstElementChild;
+        lb.onclick = function (event) {
+            var target = event.target;
+
+            if (target.tagName != 'IMG') return;
+            if (target == lbactive) return;
+
+            DynamicLanguageChange(target);
+
+            target.classList.remove("gray");
+            lbactive.classList.add("gray");
+            lbactive = target;
+        };
+
+        function DynamicLanguageChange(element) {
+            language = element.classList[0];
+            singleRow = document.getElementById("leftcol").firstElementChild;
+            desc = document.getElementsByClassName("description")[0].firstElementChild.nextElementSibling;
+
+            switch (language) {
+                case "language-EN":
+                    singleRow.textContent = "Enter marker name";
+                    desc.textContent = "Project Description";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "This project is implementing the route editor - a single page application,\
+                    in which the user can create on the map route by pointing the start, ending and intermediate\
+                    points of movement. The app visually consists of:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "input text field for new waypoints;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "list of already entered waypoints;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "interactive map.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "Project Functional Description";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "A new waypoint is adding by entering its name in the text field and pressing Enter key. Thereafter:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "the entered waypoint is displayed at the end of the list of already added points;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "in the current center of the map appears a marker, indicating a new waypoint.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "There is a delete button in front of each waypoint in the list, when you\
+                     press it, the waypoint disappears from the list, and the marker disappears from the map.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "The order of waypoints in the list can be changed by dragging.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Markers relevant to waypoints can be moved around the map by dragging.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Map markers are connected by straight lines in the order in which they appear\
+                    in the list. The resulting broken line represents the route, the first point in the list is the\
+                    beginning of the route, the last is the end of the route.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "When you change the order of waypoints in the list or delete them,\
+                    or when you move the markers, the route on the map is automatically redrawn.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "When you clicking on a marker, a balun appears, the name of the relevant waypoint is displayed in the balun.";
+                    break;
+                case "language-RU":
+                    singleRow.textContent = "Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РјР°СЂРєРµСЂР°";
+                    desc.textContent = "РћРїРёСЃР°РЅРёРµ РїСЂРѕРµРєС‚Р°";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Р”Р°РЅРЅС‹Р№ РїСЂРѕРµРєС‚ СЂРµР°Р»РёР·РѕРІС‹РІР°РµС‚ СЂРµРґР°РєС‚РѕСЂ РјР°СЂС€СЂСѓС‚РѕРІ вЂ” РѕРґРЅРѕСЃС‚СЂР°РЅРёС‡РЅРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ,\
+                    РІ РєРѕС‚РѕСЂРѕРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ РІ РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕРј СЂРµР¶РёРјРµ РјРѕР¶РµС‚ СЃРѕР·РґР°РІР°С‚СЊ РЅР° РєР°СЂС‚Рµ РјР°СЂС€СЂСѓС‚, СѓРєР°Р·С‹РІР°СЏ РЅР°С‡Р°Р»СЊРЅСѓСЋ,\
+                    РєРѕРЅРµС‡РЅСѓСЋ Рё РїСЂРѕРјРµР¶СѓС‚РѕС‡РЅС‹Рµ С‚РѕС‡РєРё РґРІРёР¶РµРЅРёСЏ.РџСЂРёР»РѕР¶РµРЅРёРµ РІРёР·СѓР°Р»СЊРЅРѕ СЃРѕСЃС‚РѕРёС‚ РёР·:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "С‚РµРєСЃС‚РѕРІРѕРіРѕ РїРѕР»СЏ РІРІРѕРґР° РґР»СЏ РЅРѕРІС‹С… С‚РѕС‡РµРє РјР°СЂС€СЂСѓС‚Р°;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "СЃРїРёСЃРєР° СѓР¶Рµ РІРІРµРґРµРЅРЅС‹С… С‚РѕС‡РµРє РјР°СЂС€СЂСѓС‚Р°;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕР№ РєР°СЂС‚С‹.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "Р¤СѓРЅРєС†РёРѕРЅР°Р»СЊРЅРѕРµ РѕРїРёСЃР°РЅРёРµ РїСЂРѕРµРєС‚Р°";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РќРѕРІР°СЏ С‚РѕС‡РєР° РјР°СЂС€СЂСѓС‚Р° РґРѕР±Р°РІР»СЏРµС‚СЃСЏ СЃ РїРѕРјРѕС‰СЊСЋ РІРІРѕРґР° РµРµ РЅР°Р·РІР°РЅРёСЏ РІ С‚РµРєСЃС‚РѕРІРѕРј РїРѕР»Рµ Рё РЅР°Р¶Р°С‚РёСЏ Enter. РџРѕСЃР»Рµ СЌС‚РѕРіРѕ:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "РІРІРµРґРµРЅРЅР°СЏ С‚РѕС‡РєР° РјР°СЂС€СЂСѓС‚Р° РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РІ РєРѕРЅС†Рµ СЃРїРёСЃРєР° СѓР¶Рµ РґРѕР±Р°РІР»РµРЅРЅС‹С… С‚РѕС‡РµРє;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РІ С‚РµРєСѓС‰РµРј С†РµРЅС‚СЂРµ РєР°СЂС‚С‹ РїРѕСЏРІР»СЏРµС‚СЃСЏ РјР°СЂРєРµСЂ, РѕР±РѕР·РЅР°С‡Р°СЋС‰РёР№ РЅРѕРІСѓСЋ С‚РѕС‡РєСѓ РјР°СЂС€СЂСѓС‚Р°.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "РќР°РїСЂРѕС‚РёРІ РєР°Р¶РґРѕР№ С‚РѕС‡РєРё РјР°СЂС€СЂСѓС‚Р° РІ СЃРїРёСЃРєРµ РЅР°С…РѕРґРёС‚СЃСЏ РєРЅРѕРїРєР° СѓРґР°Р»РµРЅРёСЏ,\
+                    РїСЂРё РµРµ РЅР°Р¶Р°С‚РёРё С‚РѕС‡РєР° РјР°СЂС€СЂСѓС‚Р° РїСЂРѕРїР°РґР°РµС‚ РёР· СЃРїРёСЃРєР°, Р° СЃ РєР°СЂС‚С‹ РїСЂРѕРїР°РґР°РµС‚ РµРµ РјР°СЂРєРµСЂ.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РџРѕСЂСЏРґРѕРє С‚РѕС‡РµРє РјР°СЂС€СЂСѓС‚Р° РІ СЃРїРёСЃРєРµ РјРѕР¶РЅРѕ РёР·РјРµРЅСЏС‚СЊ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµРј.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РњР°СЂРєРµСЂС‹, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ С‚РѕС‡РєР°Рј РјР°СЂС€СЂСѓС‚Р°, РјРѕР¶РЅРѕ РїРµСЂРµРјРµС‰Р°С‚СЊ РїРѕ РєР°СЂС‚Рµ РїРµСЂРµС‚Р°СЃРєРёРІР°РЅРёРµРј.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РњР°СЂРєРµСЂС‹ РЅР° РєР°СЂС‚Рµ СЃРѕРµРґРёРЅРµРЅС‹ РїСЂСЏРјС‹РјРё Р»РёРЅРёСЏРјРё РІ С‚РѕРј РїРѕСЂСЏРґРєРµ, РІ РєРѕС‚РѕСЂРѕРј РѕРЅРё РЅР°С…РѕРґСЏС‚СЃСЏ РІ СЃРїРёСЃРєРµ.\
+                    РџРѕР»СѓС‡РµРЅРЅР°СЏ С‚Р°РєРёРј РѕР±СЂР°Р·РѕРј Р»РѕРјР°РЅР°СЏ РёР·РѕР±СЂР°Р¶Р°РµС‚ РјР°СЂС€СЂСѓС‚, РїРµСЂРІР°СЏ С‚РѕС‡РєР° РІ СЃРїРёСЃРєРµ вЂ” РЅР°С‡Р°Р»Рѕ РјР°СЂС€СЂСѓС‚Р°, РїРѕСЃР»РµРґРЅСЏСЏ вЂ” РєРѕРЅРµС† РјР°СЂС€СЂСѓС‚Р°.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РџСЂРё РёР·РјРµРЅРµРЅРёРё РїРѕСЂСЏРґРєР° С‚РѕС‡РµРє РІ СЃРїРёСЃРєРµ РёР»Рё РёС… СѓРґР°Р»РµРЅРёРё, Р° С‚Р°РєР¶Рµ РїСЂРё РїРµСЂРµРјРµС‰РµРЅРёРё РјР°СЂРєРµСЂРѕРІ РјР°СЂС€СЂСѓС‚ РЅР° РєР°СЂС‚Рµ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё РїРµСЂРµСЂРёСЃРѕРІС‹РІР°РµС‚СЃСЏ.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "РџСЂРё РєР»РёРєРµ РЅР° РјР°СЂРєРµСЂ РїРѕСЏРІР»СЏРµС‚СЃСЏ Р±Р°Р»СѓРЅ, РІ Р±Р°Р»СѓРЅРµ РѕС‚РѕР±СЂР°Р¶Р°РµС‚СЃСЏ РЅР°Р·РІР°РЅРёРµ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµР№ РµРјСѓ С‚РѕС‡РєРё.";
+                    break;
+                case "language-PL":
+                    singleRow.textContent = "WprowadЕє nazwД™ markeru";
+                    desc.textContent = "Opis projektu";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Projekt ten realizuje edytor tras вЂ” aplikacjД™ na jednД… stronД™, w ktГіrej uЕјytkownik\
+                    w trybie online moЕјe tworzyД‡ na mapie trasД™, wskazujД…c punkt poczД…tkowy, koЕ„cowy i punkty poЕ›rednie ruchu.Aplikacja wizualnie skЕ‚ada siД™ z:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "pola tekstowego do wprowadzania nowych punktГіw trasy;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "listy juЕј wprowadzonych punktГіw trasy;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "interaktywnej mapy.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "Funkcjonalny opis projektu";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Nowy punkt trasy jest dodawany za pomocД… wprowadzenia jego nazwy w polu tekstowym i naciЕ›niД™ciu klawisza Enter. Po tym:";
+                    desc = desc.nextElementSibling.firstElementChild;
+                    desc.textContent = "wprowadzony punkt trasy pojawi siД™ na koЕ„cu listy juЕј dodanych punktГіw;";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "w bieЕјД…cym Е›rodku mapy pojawia siД™ marker, wskazujД…cy nowy punkt trasy.";
+                    desc = desc.parentNode.nextElementSibling;
+                    desc.textContent = "Obok kaЕјdego punktu trasy na liЕ›cie znajduje siД™ przycisk usuwania, po jego naciЕ›niД™ciu punkt trasy znika z listy, a z mapy znika jego marker.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "KolejnoЕ›Д‡ punktГіw trasy na liЕ›cie moЕјna zmieniaД‡, przeciД…gajД…c go.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Markery odpowiadajД…ce punktom trasy, moЕјna przemieszczaД‡ po mapie przeciД…ganiem.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Markery na mapie poЕ‚Д…czone sД… liniami prostymi w kolejnoЕ›ci, w jakiej znajdujД… siД™ one na liЕ›cie.\
+                    Uzyskana w ten sposГіb Е‚amana przedstawia trasД™, pierwszy punkt na liЕ›cie вЂ” poczД…tek trasy, ostatni вЂ” koniec trasy.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "W przypadku zmiany kolejnoЕ›ci punktГіw na liЕ›cie lub ich usuniД™cia, a takЕјe podczas przemieszczania markerГіw, trasa na mapie automatycznie siД™ odЕ›wieЕјa.";
+                    desc = desc.nextElementSibling;
+                    desc.textContent = "Po klikniД™ciu na marker pojawia siД™ chmura, w chmurze wyЕ›wietlana jest nazwa odpowiadajД…cego mu punktu.";
+                    break;                    
+                default:
+                    console.log("Invalid language define (DynamicLanguageChange function first row)");
+                    break;
+            }
+        }
+
     </script>
 </body>
 </html>
